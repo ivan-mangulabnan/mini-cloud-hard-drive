@@ -15,13 +15,14 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  username String
+  username String @unique
   password String
   profileId Int @map("profile_id") @unique
   profile Profile @relation(fields: [profileId], references: [id])
   folders Folder[]
   files File[]
 
+  @@index([id])
   @@map("users")
 }
 
