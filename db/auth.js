@@ -8,7 +8,7 @@ const getUserByUsername = async (username) => {
   return user;
 }
 
-const getAccountByID = async (id) => {
+const getProfileByID = async (id) => {
   const profile = await prisma.user.findUnique({
     where: { id },
     include: { profile: true }
@@ -17,4 +17,4 @@ const getAccountByID = async (id) => {
   return profile;
 }
 
-export default { getUserByUsername, getAccountByID }
+export default { getUserByUsername, getProfileByID }
