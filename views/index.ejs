@@ -7,6 +7,15 @@
   <title>Mini Cloud Drive</title>
 </head>
 <body>
-  <%- include('header') %>
+  <%- include('header', { user }) %>
+  <% if (user) { %>
+    <%- include('main', { user }) %>
+  <% } else { %>
+    <% if (route) { %>
+      <%- include(route) %>
+    <% } else { %>
+      <%- include('error') %>
+    <% } %>
+  <% } %>
 </body>
 </html>

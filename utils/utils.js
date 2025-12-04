@@ -9,4 +9,9 @@ const serverNotif = (err) => {
   console.log('Server running...');
 }
 
-export default { setReqUserToLocal, serverNotif };
+const checkAuth = (req, res, next) => {
+  if (!req.isAuthenticated()) return res.render('index', { route: 'login' });
+  next();
+}
+
+export default { setReqUserToLocal, serverNotif, checkAuth };
