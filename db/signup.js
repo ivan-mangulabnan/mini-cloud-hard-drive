@@ -20,4 +20,12 @@ const createUserAndProfile = async (firstName, lastName, username, password) => 
   return user;
 }
 
-export default { createUserAndProfile }
+const checkExistence = async (username) => {
+  const exists = await prisma.user.count({
+    where: { username }
+  })
+
+  return exists > 0;
+}
+
+export default { createUserAndProfile, checkExistence }
