@@ -52,7 +52,7 @@ model Folder {
 model File {
   id         Int      @id @default(autoincrement())
   name       String
-  uploadTime DateTime
+  uploadTime DateTime @default(now())
   size       Int
   ownerId    Int      @map("owner_id") @unique
   folderId   Int?     @map("folder_id") @unique
