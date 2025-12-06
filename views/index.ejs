@@ -9,7 +9,7 @@
 <body>
   <%- include('header', { user }) %>
   <% if (user) { %>
-    <%- include('main', { user }) %>
+    <%- include('main', { user, files: assets.files, folders: assets.folders }) %>
   <% } else { %>
     <% if (route) { %>
       <%- include(route) %>

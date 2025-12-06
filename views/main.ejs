@@ -1,5 +1,18 @@
 <main>
-  <form action="">
-    <input type="file">
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" required>
+    <button type="submit">Submit</button>
   </form>
+  <div>
+    <% if (folders.length > 0 || files.length > 0) { %>
+      <% folders.forEach(folder => { %>
+        <a href="/folder/:<%= folder.id %>"><%= folder.name %></a>
+      <% }) %>
+      <% files.forEach(folder => { %>
+        <a href="/file/:<%= file.id %>"><%= file.name %></a>
+      <% }) %>
+    <% } else { %>
+      <p>No file currently</p>
+    <% } %>
+  </div>
 </main>
