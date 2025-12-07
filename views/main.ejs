@@ -1,6 +1,6 @@
 <main>
   <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" required>
+    <input type="file" name="file" required>
     <button type="submit">Submit</button>
   </form>
   <div>
@@ -8,7 +8,7 @@
       <% folders.forEach(folder => { %>
         <a href="/folder/:<%= folder.id %>"><%= folder.name %></a>
       <% }) %>
-      <% files.forEach(folder => { %>
+      <% files.forEach(file => { %>
         <a href="/file/:<%= file.id %>"><%= file.name %></a>
       <% }) %>
     <% } else { %>
