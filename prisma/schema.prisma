@@ -39,7 +39,7 @@ model Folder {
   id        Int      @id @default(autoincrement())
   name      String
   createdAt DateTime @map("created_at") @default(now())
-  ownerId   Int      @unique @map("owner_id")
+  ownerId   Int      @map("owner_id")
   parentId  Int?     @map("parent_id")
   owner     User     @relation(fields: [ownerId], references: [id])
   parent    Folder?  @relation("FolderHeirarchy", fields: [parentId], references: [id])
@@ -54,8 +54,8 @@ model File {
   name       String
   uploadTime DateTime @default(now())
   size       Int
-  ownerId    Int      @map("owner_id") @unique
-  folderId   Int?     @map("folder_id") @unique
+  ownerId    Int      @map("owner_id")
+  folderId   Int?     @map("folder_id")
   owner      User     @relation(fields: [ownerId], references: [id])
   folder     Folder?  @relation(fields: [folderId], references: [id])
 
