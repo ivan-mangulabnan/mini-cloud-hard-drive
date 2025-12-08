@@ -1,0 +1,19 @@
+<div>
+  <button id="create-folder">New Folder</button>
+  <form action="/folder<%= folderId ? `/${folderId}` : ''%>" method="post">
+    <label for="folder-name">Folder Name:</label>
+    <input id="folder-name" type="text" name="name" required>
+    <button id="submit" type="submit">Add Folder</button>
+  </form>
+</div>
+<script>
+  const newFolderBtn = document.querySelector('#create-folder');
+  const form = document.querySelector('form');
+
+  form.style.display = 'none';
+
+  newFolderBtn.addEventListener('click', () => {
+    newFolderBtn.textContent = newFolderBtn.textContent === 'X' ? 'New Folder' : 'X';
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  })
+</script>
