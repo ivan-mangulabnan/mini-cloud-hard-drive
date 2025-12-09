@@ -12,10 +12,10 @@
     </div>
     <% if (folders.length > 0 || files.length > 0) { %>
       <% folders.forEach(folder => { %>
-        <a href="/folder/<%= folder.id %>"><%= folder.name %></a>
+         <%- include('folder', { folder }) %>
       <% }) %>
       <% files.forEach(file => { %>
-        <a href="/file/<%= file.id %>"><%= file.name %></a>
+        <%- include('file', { file }) %>
       <% }) %>
     <% } else { %>
       <p>No file currently</p>

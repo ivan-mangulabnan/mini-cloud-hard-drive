@@ -37,12 +37,12 @@ model Profile {
 
 model Folder {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
   createdAt DateTime @map("created_at") @default(now())
   ownerId   Int      @map("owner_id")
   parentId  Int?     @map("parent_id")
   owner     User     @relation(fields: [ownerId], references: [id])
-  parent    Folder?  @relation("FolderHeirarchy", fields: [parentId], references: [id])
+  parent    Folder?  @relation("FolderHeirarchy", fields: [parentId], references: [id], onDelete: Cascade)
   children  Folder[] @relation("FolderHeirarchy")
   files     File[]
 
@@ -54,10 +54,11 @@ model File {
   name       String
   uploadTime DateTime @default(now())
   size       Int
+  path       String?  
   ownerId    Int      @map("owner_id")
   folderId   Int?     @map("folder_id")
   owner      User     @relation(fields: [ownerId], references: [id])
-  folder     Folder?  @relation(fields: [folderId], references: [id])
+  folder     Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
 
   @@map("files")
 }
