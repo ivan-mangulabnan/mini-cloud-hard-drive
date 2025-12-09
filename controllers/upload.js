@@ -11,8 +11,7 @@ const insertFile = async (req, res) => {
   folderId = folderId ? Number(folderId) : folderId;
 
   const filePath = `${req.user.id}-${Date.now()}-${req.file.originalname}`;
-
-  const { error } = await supabase.storage.from('assets').upload(filePath, req.file.buffer);
+  const { error } = await supabase.storage.from('assets').upload(filePath, req.file.buffer, { contentType: req.file.mimetype });
 
   if (error) return res.send('supabase error');
 
