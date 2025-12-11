@@ -66,12 +66,12 @@ deleteRoute.get('/file/:id', utils.checkAuth, async (req, res) => {
 
   if (Number.isNaN(fileId)) return res.status(400).send('id should be a number');
 
-  const { filepath, folderId } = await prisma.file.delete({
+  const { path, folderId } = await prisma.file.delete({
     where: { id: fileId },
     select: { path: true, folderId: true }
   });
-
-  await deleteSupabaseFiles(filepath);
+  
+  await deleteSupabaseFiles(path);
 
   const route = folderId ? `/folder/${folderId}` : '/';
   res.redirect(route);

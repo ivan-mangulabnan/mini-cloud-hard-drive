@@ -3,7 +3,7 @@ const getLogout = (req, res) => {
     console.error(err);
   });
 
-  res.redirect('/');
+  res.redirect('/login');
 }
 
 export default { getLogout }
