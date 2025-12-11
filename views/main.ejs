@@ -1,7 +1,7 @@
 <main>
   <form action="/upload<%= folderId ? `/${folderId}` : ''%>" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" required>
-    <button type="submit">Submit</button>
+    <input id="input-file" type="file" name="file" required>
+    <button id="file-submit-btn" type="submit">Submit</button>
   </form>
   <div>
     <div>
@@ -22,3 +22,11 @@
     <% } %>
   </div>
 </main>
+<script>
+  const inputFile = document.querySelector('#input-file');
+  const fileSubmitBtn = document.querySelector('#file-submit-btn');
+
+  inputFile.addEventListener('change', () => {
+    fileSubmitBtn.click();
+  })
+</script>
