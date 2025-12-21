@@ -14,31 +14,31 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  username String @unique
+  id       Int      @id @default(autoincrement())
+  username String   @unique
   password String
-  profile Profile?
-  folders Folder[]
-  files File[]
+  profile  Profile?
+  folders  Folder[]
+  files    File[]
 
   @@index([id])
   @@map("users")
 }
 
 model Profile {
-  id Int @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   firstName String @map("first_name")
-  lastName String @map("last_name")
-  userId Int @unique
-  user User @relation(fields: [userId], references: [id])
+  lastName  String @map("last_name")
+  userId    Int    @unique
+  user      User   @relation(fields: [userId], references: [id])
 
   @@map("profiles")
 }
 
 model Folder {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @map("created_at") @default(now())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
   ownerId   Int      @map("owner_id")
   parentId  Int?     @map("parent_id")
   owner     User     @relation(fields: [ownerId], references: [id])
@@ -46,6 +46,7 @@ model Folder {
   children  Folder[] @relation("FolderHeirarchy")
   files     File[]
 
+  @@unique([name, parentId, ownerId])
   @@map("folders")
 }
 
@@ -54,18 +55,19 @@ model File {
   name       String
   uploadTime DateTime @default(now())
   size       Int
-  path       String?  
+  path       String?
   ownerId    Int      @map("owner_id")
   folderId   Int?     @map("folder_id")
   owner      User     @relation(fields: [ownerId], references: [id])
   folder     Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
 
+  @@unique([name, folderId, ownerId])
   @@map("files")
 }
 
 model Session {
-  id          String   @id
-  sid         String   @unique
-  data        String
-  expiresAt   DateTime
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
 }

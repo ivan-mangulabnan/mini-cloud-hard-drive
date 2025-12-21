@@ -56,6 +56,31 @@ editRoute.post('/file/:id', utils.checkAuth, async (req, res) => {
     res.redirect(file.folderId ? `/folder/${file.folderId}` : '/');
 
   } catch (err) {
+    if (err.code === 'P2002') {
+      return res.status(400).send('File name already exists in this folder');
+    }
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+editRoute.post('/folder/:id', utils.checkAuth, async (req, res) => {
+  const folderId = Number(req.params.id);
+  const { name } = req.body;
+
+  if (Number.isNaN(folderId)) return res.status(400).send('id should be a number');
+
+  try {
+    const folder = await prisma.folder.update({
+      where: { id: folderId },
+      data: { name }
+    });
+
+    res.redirect(folder.parentId ? `/folder/${folder.parentId}` : '/');
+  } catch (err) {
+    if (err.code === 'P2002') {
+      return res.status(400).send('Folder name already exists in this directory');
+    }
     console.error(err);
     res.status(500).send('Server Error');
   }

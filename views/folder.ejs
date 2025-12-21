@@ -1,7 +1,38 @@
-<div>
-  <h3><%= folder.name %></h3>
-  <p>
-    <a href="/folder/<%= folder.id %>">OPEN</a>
-    <a href="/delete/folder/<%= folder.id %>">DELETE</a>
-  </p>
+<div id="folder-container-<%= folder.id %>">
+  <div id="display-folder-<%= folder.id %>">
+    <h3>
+      <%= folder.name %>
+    </h3>
+    <p>
+      <a href="/folder/<%= folder.id %>">OPEN</a>
+      <a href="/delete/folder/<%= folder.id %>">DELETE</a>
+      <a href="#" onclick="toggleFolderEdit('<%= folder.id %>'); return false;">EDIT</a>
+    </p>
+  </div>
+
+  <form id="edit-folder-form-<%= folder.id %>" action="/edit/folder/<%= folder.id %>" method="POST"
+    style="display: none;">
+    <input type="text" name="name" value="<%= folder.name %>" required />
+    <button type="submit">SAVE</button>
+    <button type="button" onclick="toggleFolderEdit('<%= folder.id %>')">CANCEL</button>
+  </form>
 </div>
+
+<script>
+  if (typeof toggleFolderEdit === 'undefined') {
+    function toggleFolderEdit(id) {
+      const display = document.getElementById(`display-folder-${id}`);
+      const form = document.getElementById(`edit-folder-form-${id}`);
+
+      if (form.style.display === 'none') {
+        form.style.display = 'block';
+        display.style.display = 'none';
+        const input = form.querySelector('input');
+        if (input) input.focus();
+      } else {
+        form.style.display = 'none';
+        display.style.display = 'block';
+      }
+    }
+  }
+</script>
