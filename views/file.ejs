@@ -1,8 +1,35 @@
-<div>
-  <h3><%= file.name %></h3>
-  <p>
-    <a href="/download/<%= file.id %>">DOWNLOAD</a>
-    <a href="/delete/file/<%= file.id %>">DELETE</a>
-    <a href="/edit/file/<%= file.id %>">EDIT</a>
-  </p>
+<div id="file-container-<%= file.id %>">
+  <div id="display-<%= file.id %>">
+    <h3>
+      <%= file.name %>
+    </h3>
+    <p>
+      <a href="/download/<%= file.id %>">DOWNLOAD</a>
+      <a href="/delete/file/<%= file.id %>">DELETE</a>
+      <a href="#" onclick="toggleEdit('<%= file.id %>'); return false;">EDIT</a>
+    </p>
+  </div>
+
+  <form id="edit-form-<%= file.id %>" action="/edit/file/<%= file.id %>" method="POST" style="display: none;">
+    <input type="text" name="name" value="<%= file.name %>" required />
+    <button type="submit">SAVE</button>
+    <button type="button" onclick="toggleEdit('<%= file.id %>')">CANCEL</button>
+  </form>
 </div>
+
+<script>
+  function toggleEdit(id) {
+    const display = document.getElementById(`display-${id}`);
+    const form = document.getElementById(`edit-form-${id}`);
+
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      display.style.display = 'none';
+      const input = form.querySelector('input');
+      if (input) input.focus();
+    } else {
+      form.style.display = 'none';
+      display.style.display = 'block';
+    }
+  }
+</script>

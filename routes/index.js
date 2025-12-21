@@ -8,6 +8,7 @@ import uploadRoute from "./upload.js";
 import folderRoute from "./folder.js";
 import downloadRoute from "./download.js";
 import deleteRoute from "./delete.js";
+import editRoute from "./edit.js";
 
 const indexRoute = Router();
 
@@ -18,6 +19,7 @@ indexRoute.use('/upload', uploadRoute);
 indexRoute.use('/folder', folderRoute);
 indexRoute.use('/download', downloadRoute);
 indexRoute.use('/delete', deleteRoute);
+indexRoute.use('/edit', editRoute);
 
 indexRoute.get('/', utils.checkAuth, controller.getIndex);
 
