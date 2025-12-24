@@ -7,6 +7,7 @@
       <a href="/download/<%= file.id %>">DOWNLOAD</a>
       <a href="/delete/file/<%= file.id %>">DELETE</a>
       <a href="#" onclick="toggleEdit('<%= file.id %>'); return false;">EDIT</a>
+      <a href="#" onclick="toggleInfo('<%= file.id %>'); return false;">INFO</a>
     </p>
   </div>
 
@@ -15,21 +16,57 @@
     <button type="submit">SAVE</button>
     <button type="button" onclick="toggleEdit('<%= file.id %>')">CANCEL</button>
   </form>
+
+  <div id="info-<%= file.id %>" style="display: none;">
+    <p><strong>Name:</strong>
+      <%= file.name %>
+    </p>
+    <p><strong>Size:</strong>
+      <%= file.size %> bytes
+    </p>
+    <p><strong>Uploaded:</strong>
+      <%= file.uploadTime %>
+    </p>
+    <button onclick="toggleInfo('<%= file.id %>')">RETURN</button>
+  </div>
 </div>
 
 <script>
-  function toggleEdit(id) {
-    const display = document.getElementById(`display-${id}`);
-    const form = document.getElementById(`edit-form-${id}`);
+  if (typeof toggleEdit === 'undefined') {
+    function toggleEdit(id) {
+      const display = document.getElementById(`display-${id}`);
+      const form = document.getElementById(`edit-form-${id}`);
+      const info = document.getElementById(`info-${id}`);
 
-    if (form.style.display === 'none') {
-      form.style.display = 'block';
-      display.style.display = 'none';
-      const input = form.querySelector('input');
-      if (input) input.focus();
-    } else {
-      form.style.display = 'none';
-      display.style.display = 'block';
+      if (info) info.style.display = 'none';
+
+      if (form.style.display === 'none') {
+        form.style.display = 'block';
+        display.style.display = 'none';
+        const input = form.querySelector('input');
+        if (input) input.focus();
+      } else {
+        form.style.display = 'none';
+        display.style.display = 'block';
+      }
+    }
+  }
+
+  if (typeof toggleInfo === 'undefined') {
+    function toggleInfo(id) {
+      const display = document.getElementById(`display-${id}`);
+      const form = document.getElementById(`edit-form-${id}`);
+      const info = document.getElementById(`info-${id}`);
+
+      if (form) form.style.display = 'none';
+
+      if (info.style.display === 'none') {
+        info.style.display = 'block';
+        display.style.display = 'none';
+      } else {
+        info.style.display = 'none';
+        display.style.display = 'block';
+      }
     }
   }
 </script>
