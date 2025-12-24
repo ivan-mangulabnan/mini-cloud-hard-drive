@@ -5,21 +5,23 @@
   </form>
   <div>
     <div>
-      <% breadcrumb.forEach((item, i) => { %>
-        <a href="<%= item.id ? `/folder/${item.id}` : '/' %>"><%= item.name %></a>
+      <% breadcrumb.forEach((item, i)=> { %>
+        <a href="<%= item.id ? `/folder/${item.id}` : '/' %>">
+          <%= item.name %>
+        </a>
         <% if (i < breadcrumb.length - 1) { %> / <% } %>
-      <% }) %>
+            <% }) %>
     </div>
-    <% if (folders.length > 0 || files.length > 0) { %>
-      <% folders.forEach(folder => { %>
-         <%- include('folder', { folder }) %>
-      <% }) %>
-      <% files.forEach(file => { %>
-        <%- include('file', { file }) %>
-      <% }) %>
-    <% } else { %>
-      <p>No file currently</p>
-    <% } %>
+    <% if (folders.length> 0 || files.length > 0) { %>
+      <% folders.forEach(folder=> { %>
+        <%- include('folder', { folder }) %>
+          <% }) %>
+            <% files.forEach(file=> { %>
+              <%- include('file', { file }) %>
+                <% }) %>
+                  <% } else { %>
+                    <p>No file currently</p>
+                    <% } %>
   </div>
 </main>
 <script>
