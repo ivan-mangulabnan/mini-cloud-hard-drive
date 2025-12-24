@@ -1,28 +1,29 @@
 <main>
-  <form action="/upload<%= folderId ? `/${folderId}` : ''%>" method="post" enctype="multipart/form-data">
-    <input id="input-file" type="file" name="file" required>
-    <button id="file-submit-btn" type="submit">Submit</button>
-  </form>
-  <div>
+  <%- include('create-folder') %>
+    <form action="/upload<%= folderId ? `/${folderId}` : ''%>" method="post" enctype="multipart/form-data">
+      <input id="input-file" type="file" name="file" required>
+      <button id="file-submit-btn" type="submit">Submit</button>
+    </form>
     <div>
-      <% breadcrumb.forEach((item, i)=> { %>
-        <a href="<%= item.id ? `/folder/${item.id}` : '/' %>">
-          <%= item.name %>
-        </a>
-        <% if (i < breadcrumb.length - 1) { %> / <% } %>
+      <div>
+        <% breadcrumb.forEach((item, i)=> { %>
+          <a href="<%= item.id ? `/folder/${item.id}` : '/' %>">
+            <%= item.name %>
+          </a>
+          <% if (i < breadcrumb.length - 1) { %> / <% } %>
+              <% }) %>
+      </div>
+      <% if (folders.length> 0 || files.length > 0) { %>
+        <% folders.forEach(folder=> { %>
+          <%- include('folder', { folder }) %>
             <% }) %>
+              <% files.forEach(file=> { %>
+                <%- include('file', { file }) %>
+                  <% }) %>
+                    <% } else { %>
+                      <p>No file currently</p>
+                      <% } %>
     </div>
-    <% if (folders.length> 0 || files.length > 0) { %>
-      <% folders.forEach(folder=> { %>
-        <%- include('folder', { folder }) %>
-          <% }) %>
-            <% files.forEach(file=> { %>
-              <%- include('file', { file }) %>
-                <% }) %>
-                  <% } else { %>
-                    <p>No file currently</p>
-                    <% } %>
-  </div>
 </main>
 <script>
   const inputFile = document.querySelector('#input-file');
