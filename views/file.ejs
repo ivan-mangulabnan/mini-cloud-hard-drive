@@ -1,9 +1,9 @@
-<div id="file-container-<%= file.id %>">
+<div id="file-container-<%= file.id %>" class="item-card">
   <div id="display-<%= file.id %>">
     <h3>
       <%= file.name %>
     </h3>
-    <p>
+    <p class="item-actions">
       <a href="/download/<%= file.id %>">DOWNLOAD</a>
       <a href="/delete/file/<%= file.id %>">DELETE</a>
       <a href="#" onclick="toggleEdit('<%= file.id %>'); return false;">EDIT</a>

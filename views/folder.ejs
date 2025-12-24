@@ -1,9 +1,9 @@
-<div id="folder-container-<%= folder.id %>">
+<div id="folder-container-<%= folder.id %>" class="item-card folder-card">
   <div id="display-folder-<%= folder.id %>">
     <h3>
       <%= folder.name %>
     </h3>
-    <p>
+    <p class="item-actions">
       <a href="/folder/<%= folder.id %>">OPEN</a>
       <a href="/delete/folder/<%= folder.id %>">DELETE</a>
       <a href="#" onclick="toggleFolderEdit('<%= folder.id %>'); return false;">EDIT</a>

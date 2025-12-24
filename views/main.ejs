@@ -5,7 +5,7 @@
       <button id="file-submit-btn" type="submit">Submit</button>
     </form>
     <div>
-      <div>
+      <div class="breadcrumbs">
         <% breadcrumb.forEach((item, i)=> { %>
           <a href="<%= item.id ? `/folder/${item.id}` : '/' %>">
             <%= item.name %>
@@ -13,16 +13,18 @@
           <% if (i < breadcrumb.length - 1) { %> / <% } %>
               <% }) %>
       </div>
-      <% if (folders.length> 0 || files.length > 0) { %>
-        <% folders.forEach(folder=> { %>
-          <%- include('folder', { folder }) %>
-            <% }) %>
-              <% files.forEach(file=> { %>
-                <%- include('file', { file }) %>
-                  <% }) %>
-                    <% } else { %>
-                      <p>No file currently</p>
-                      <% } %>
+      <div class="assets-grid">
+        <% if (folders.length> 0 || files.length > 0) { %>
+          <% folders.forEach(folder=> { %>
+            <%- include('folder', { folder }) %>
+              <% }) %>
+                <% files.forEach(file=> { %>
+                  <%- include('file', { file }) %>
+                    <% }) %>
+                      <% } else { %>
+                        <p>No file currently</p>
+                        <% } %>
+      </div>
     </div>
 </main>
 <script>

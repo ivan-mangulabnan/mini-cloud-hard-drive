@@ -1,4 +1,6 @@
-<div>
+<div class="app-header">
   <h1>Cloud Drive</h1>
-  <a href="/logout">Logout</a>
+  <% if(user) { %>
+    <a href="/logout">Logout</a>
+    <% } %>
 </div>
