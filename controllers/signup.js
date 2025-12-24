@@ -1,6 +1,7 @@
 import db from '../db/signup.js';
 
 const getSignUp = (req, res) => {
+  if (req.user) return res.redirect('/');
   res.render('index', { route: 'signup' });
 }
 

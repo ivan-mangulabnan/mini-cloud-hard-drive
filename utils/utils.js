@@ -14,4 +14,9 @@ const checkAuth = (req, res, next) => {
   next();
 }
 
-export default { setReqUserToLocal, serverNotif, checkAuth };
+const removeResponseCache = (req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  next();
+}
+
+export default { setReqUserToLocal, serverNotif, checkAuth, removeResponseCache };

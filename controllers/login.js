@@ -1,6 +1,7 @@
 import passport from "passport";
 
 const getLogin = (req, res) => {
+  if (req.user) return res.redirect('/');
   res.render('index', { route: 'login' });
 }
 

@@ -21,6 +21,6 @@ indexRoute.use('/download', downloadRoute);
 indexRoute.use('/delete', deleteRoute);
 indexRoute.use('/edit', editRoute);
 
-indexRoute.get('/', utils.checkAuth, controller.getIndex);
+indexRoute.get('/', utils.checkAuth, utils.removeResponseCache, controller.getIndex);
 
 export default indexRoute;
